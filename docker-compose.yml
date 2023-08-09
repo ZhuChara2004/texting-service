@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  db:
+    container_name: "${NETWORK:-development}-texting_service-db"
+    image: postgres
+    volumes:
+      - texting_service-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: texting_service_development
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_INITDB_ARGS: --auth-host=trust
+  redis:
+    container_name: "${NETWORK:-development}-texting_service-redis"
+    image: redis:7.0-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - texting_service-redis:/var/lib/redis/data
+
+volumes:
+  texting_service-data:
+    driver: local
+  texting_service-redis:
+    driver: local
