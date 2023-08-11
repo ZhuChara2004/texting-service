@@ -19,6 +19,8 @@ class PhoneNumber < ApplicationRecord
     inactive: "inactive"
   }.freeze
 
+  has_many :messages, dependent: :destroy
+
   def deactivate!
     update!(status: STATUSES[:inactive])
   end
