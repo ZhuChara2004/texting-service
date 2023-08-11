@@ -4,7 +4,7 @@ class CreatePhoneNumbers < ActiveRecord::Migration[7.0]
 
     create_table :phone_numbers do |t|
       t.uuid :public_id, null: false, default: -> { "gen_random_uuid()" }
-      t.string :number
+      t.string :number, null: false
       t.enum :status, enum_type: :phone_number_statuses, null: false, default: "active"
 
       t.timestamps

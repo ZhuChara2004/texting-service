@@ -3,7 +3,7 @@
 # Table name: phone_numbers
 #
 #  id         :bigint           not null, primary key
-#  number     :string
+#  number     :string           not null
 #  status     :enum             default("active"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

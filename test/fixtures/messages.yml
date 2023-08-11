@@ -21,7 +21,5 @@
 #
 
 pending:
-  public_id:
   body: Pending text message
-  status: pending
   phone_number: one

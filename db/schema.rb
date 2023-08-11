@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_111011) do
 
   create_table "phone_numbers", force: :cascade do |t|
     t.uuid "public_id", default: -> { "gen_random_uuid()" }, null: false
-    t.string "number"
+    t.string "number", null: false
     t.enum "status", default: "active", null: false, enum_type: "phone_number_statuses"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
