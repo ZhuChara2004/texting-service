@@ -20,5 +20,24 @@
 #  fk_rails_...  (phone_number_id => phone_numbers.id)
 #
 class Message < ApplicationRecord
+  include AASM
+
   belongs_to :phone_number
+
+  aasm column: :status, no_direct_assignment: true do
+    state :pending, initial: true
+    state :delivered, :failed, :invalid
+
+    event :delivered do
+      transitions from: :pending, to: :delivered
+    end
+
+    event :failed do
+      transitions from: :pending, to: :failed
+    end
+
+    event :invalid do
+      transitions from: :pending, to: :invalid
+    end
+  end
 end

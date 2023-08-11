@@ -22,7 +22,21 @@
 require "test_helper"
 
 class MessageTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "delivered! transitions from pending to delivered" do
+    message = messages(:pending)
+    message.delivered!
+    assert_equal "delivered", message.status
+  end
+
+  test "failed! transitions from pending to failed" do
+    message = messages(:pending)
+    message.failed!
+    assert_equal "failed", message.status
+  end
+
+  test "invalid! transitions from pending to invalid" do
+    message = messages(:pending)
+    message.invalid!
+    assert_equal "invalid", message.status
+  end
 end

@@ -20,14 +20,8 @@
 #  fk_rails_...  (phone_number_id => phone_numbers.id)
 #
 
-one:
-  public_id: 
-  body: Sample text message
+pending:
+  public_id:
+  body: Pending text message
   status: pending
   phone_number: one
-
-two:
-  public_id: 
-  body: Another sample text message
-  status: delivered
-  phone_number: two
