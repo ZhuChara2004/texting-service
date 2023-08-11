@@ -8,12 +8,13 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  phone_number_id :bigint           not null
+#  provider_id     :uuid
 #  public_id       :uuid             not null
 #
 # Indexes
 #
 #  index_messages_on_phone_number_id  (phone_number_id)
-#  index_messages_on_public_id        (public_id) UNIQUE
+#  index_messages_on_provider_id      (provider_id) UNIQUE
 #
 # Foreign Keys
 #

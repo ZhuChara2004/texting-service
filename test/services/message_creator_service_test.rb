@@ -3,11 +3,14 @@
 require "test_helper"
 
 class MessageCreatorServiceTest < ActiveSupport::TestCase
-  test "#call creates a phone number and message" do
+  test "#call creates a phone number, message and runs job" do
     params = {
       phone_number: "1234567890",
       message_body: "Hello World"
     }
+
+    SmsProviderRequestJob
+      .expects(:perform_later).once
 
     assert_difference "PhoneNumber.count", 1 do
       assert_difference "Message.count", 1 do
@@ -46,6 +49,8 @@ class MessageCreatorServiceTest < ActiveSupport::TestCase
     phone_number = PhoneNumber.create!(number: "1234567890")
     phone_number.deactivate!
 
+    SmsProviderRequestJob.expects(:perform_later).never
+
     params = {
       phone_number: "1234567890",
       message_body: "Hello World"
@@ -63,6 +68,8 @@ class MessageCreatorServiceTest < ActiveSupport::TestCase
       phone_number: nil,
       message_body: "Why isn't it working?"
     }
+
+    SmsProviderRequestJob.expects(:perform_later).never
 
     assert_no_difference "Message.count" do
       result = MessageCreatorService.call(params)

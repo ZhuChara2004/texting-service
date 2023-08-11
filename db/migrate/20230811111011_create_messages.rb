@@ -10,7 +10,5 @@ class CreateMessages < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_index :messages, :public_id, unique: true
   end
 end

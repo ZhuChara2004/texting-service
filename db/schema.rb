@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_111011) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_175352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,8 +26,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_111011) do
     t.bigint "phone_number_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "provider_id"
     t.index ["phone_number_id"], name: "index_messages_on_phone_number_id"
-    t.index ["public_id"], name: "index_messages_on_public_id", unique: true
+    t.index ["provider_id"], name: "index_messages_on_provider_id", unique: true
   end
 
   create_table "phone_numbers", force: :cascade do |t|
