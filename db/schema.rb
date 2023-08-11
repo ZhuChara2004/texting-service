@@ -10,8 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_09_145925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "phone_number_statuses", ["active", "inactive"]
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.uuid "public_id"
+    t.string "number"
+    t.enum "status", default: "active", null: false, enum_type: "phone_number_statuses"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_phone_numbers_on_number", unique: true
+  end
 
 end
