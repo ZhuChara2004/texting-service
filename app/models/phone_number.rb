@@ -7,7 +7,7 @@
 #  status     :enum             default("active"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  public_id  :uuid
+#  public_id  :uuid             not null
 #
 # Indexes
 #

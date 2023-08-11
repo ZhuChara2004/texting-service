@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_111011) do
   create_enum "phone_number_statuses", ["active", "inactive"]
 
   create_table "messages", force: :cascade do |t|
-    t.uuid "public_id"
+    t.uuid "public_id", default: -> { "gen_random_uuid()" }, null: false
     t.string "body"
     t.enum "status", default: "pending", null: false, enum_type: "message_statuses"
     t.bigint "phone_number_id", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_111011) do
   end
 
   create_table "phone_numbers", force: :cascade do |t|
-    t.uuid "public_id"
+    t.uuid "public_id", default: -> { "gen_random_uuid()" }, null: false
     t.string "number"
     t.enum "status", default: "active", null: false, enum_type: "phone_number_statuses"
     t.datetime "created_at", null: false

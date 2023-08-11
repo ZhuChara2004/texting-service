@@ -8,7 +8,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  phone_number_id :bigint           not null
-#  public_id       :uuid
+#  public_id       :uuid             not null
 #
 # Indexes
 #

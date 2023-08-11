@@ -22,6 +22,7 @@ end
 group :development do
   gem "annotate"
   gem "dotenv-rails"
+  gem "faker"
   gem "web-console"
 end
 
