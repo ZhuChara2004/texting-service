@@ -6,7 +6,6 @@ class MessagesController < ApplicationController
   end
 
   def delivery_status
-    puts params
-    # render json: MessageDeliveryStatusService.call(params)
+    render json: MessageDeliveryStatusService.call(params)
   end
 end
