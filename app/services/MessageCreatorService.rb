@@ -22,7 +22,7 @@ class MessageCreatorService
     message = phone_number_object.messages.create(body: @params[:message_body])
 
     if message
-      SmsProviderRequestJob.perform_later(message, "https://mock-text-provider.parentsquare.com/provider1")
+      SmsProviderRequestJob.perform_later(message, load_balanced_url)
 
       {
         status: "ok",
@@ -46,5 +46,11 @@ class MessageCreatorService
 
   def phone_number_object
     PhoneNumber.find_or_create_by(number: @params[:phone_number])
+  end
+
+  # It's a most simple and straightforward way to equally balance the load between providers.
+  def load_balanced_url
+    # This URLs list should be added to .env file
+    ENV.fetch("SMS_PROVIDER_URLS", "https://example.com/prov1,https://example.com/prov2").split(",").sample
   end
 end
